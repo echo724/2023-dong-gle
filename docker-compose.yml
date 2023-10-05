@@ -9,7 +9,7 @@ services:
     environment:
       - SPRING_PROFILES_ACTIVE
     deploy:
-      recourses:
+      resources:
         limits:
           cpus: "0.6"
           memory: 1.5g
