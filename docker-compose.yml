@@ -1,18 +1,18 @@
 version: "3"
 services:
-  frontend:
-    image: ${DOCKER_USERNAME}/dong-gle-frontend-${INFRA_PROFILE}
-    expose:
-      - 3000
-
   backend:
-    image: ${DOCKER_USERNAME}/dong-gle-backend
+    image: ${DOCKER_USERNAME}/dong-gle-backend-load-test:latest
     expose:
       - 8080
     volumes:
       - /home/ubuntu/logs/:/logs/
     environment:
       - SPRING_PROFILES_ACTIVE
+    deploy:
+      recourses:
+        limits:
+          cpus: "0.6"
+          memory: 1.5g
 
   nginx:
     container_name: nginx
@@ -26,5 +26,4 @@ services:
       - 80:80
       - 443:443
     depends_on:
-      - frontend
       - backend
